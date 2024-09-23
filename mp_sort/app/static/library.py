@@ -1,8 +1,10 @@
 from org.transcrypt.stubs.browser import *
-import random
+import random, time
 
 def gen_random_int(number, seed):
-	pass
+	rand_array = [num for num in range(number)]
+	random.shuffle(rand_array)
+	return rand_array
 
 def generate():
 	number = 10
@@ -10,15 +12,16 @@ def generate():
 
 	# call gen_random_int() with the given number and seed
 	# store it to the variable array
-	pass
 
-	array = None
-	# convert the items into one single string 
+	array = gen_random_int(number, seed)
+	# convert the items into one single string
 	# the number should be separated by a comma
 	# and a full stop should end the string.
-	pass
 
 	array_str = None
+
+	array_str = ",".join(str(num) for num in array)
+	array_str += "."
 
 	# This line is to placed the string into the HTML
 	# under div section with the id called "generate"	
@@ -35,10 +38,22 @@ def sortnumber1():
 		- call your sort function, either bubble sort or insertion sort
 		- create a string of the sorted numbers and store it in array_str
 	'''
-	pass
-
-	array_str = None
-	
+	array_str = document.getElementById("generate").innerHTML
+	array_str = array_str.split(",")
+	array_str[len(array_str) - 1] = array_str[len(array_str) - 1].split(".")[0]
+	sortedarray = [int(num) for num in array_str]
+	n = len(sortedarray)
+	swapped = True
+	new_n = 0
+	while swapped:
+		swapped = False
+		for si in range(1, n):
+			if sortedarray[si - 1] > sortedarray[si]:
+				sortedarray[si - 1], sortedarray[si] = sortedarray[si], sortedarray[si - 1]
+				swapped = True
+				new_n = si
+		n = new_n
+	array_str = ",".join(str(num) for num in sortedarray)
 	document.getElementById("sorted").innerHTML = array_str
 
 def sortnumber2():

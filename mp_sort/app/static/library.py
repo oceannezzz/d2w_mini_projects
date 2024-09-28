@@ -77,10 +77,20 @@ def sortnumber2():
 
 	# Your code should start from here
 	# store the final string to the variable array_str
-	pass
+	numbers = value.split(',') #split input string by commas
 
-	array_str = None
+	numbers = list(map(int,filter(None, (num.strip() for num in numbers))))
+	#Remove any leading/trailing whitespace and convert to integers
 
+	#start with bubble sort 
+	n = len(numbers)
+	for i in range(n):
+		for j in range(0,n - i - 1):
+			if numbers[j] > numbers[j + 1]:
+				numbers[j],numbers[j+1] = numbers[j+1], numbers[j]
+
+	array_str = ", ".join(map(str,numbers))
+	# store the final string to the variable array_str
+	#print(array_str) #print to see?
+	
 	document.getElementById("sorted").innerHTML = array_str
-
-
